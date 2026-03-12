@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("./fonts/Inter.ttf") format("ttf");
+}
+
+h1,
+h3,
+p,
+body {
+    margin: 0;
+}
+
+nav {
+    height: 64px;
+    width: 100%;
+    color: #F8FAFC;
+    padding: 24px;
+}
+
+body {
+    min-height: 100vh;
+    background-image: linear-gradient(135deg, #3B5E8F, #5F84BC, #8FB6E8);
+    font-family: "Inter";
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+}
+
+.navbar-title{
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+input[type="search"]{
+    height: 36px;
+    width: 270px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.345);
+    color: #F8FAFC;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+input[type="search"]:focus{
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+label{
+    font-size: 18px;
+    font-weight: 500;
+    color: #F1F5F9;
+    opacity: 0.95;
+    letter-spacing: 0.3px;
+}
+
+.search-bar-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
