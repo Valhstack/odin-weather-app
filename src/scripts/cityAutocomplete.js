@@ -1,4 +1,4 @@
-import { reset } from "./render.js";
+import { reset, renderCityDropdown } from "./render.js";
 import { attachListeners } from "./listeners.js";
 import { fetchWeather } from "./weather.js";
 
@@ -32,15 +32,7 @@ const cityName = () => {
                         if (!seen.has(city)) {
                             seen.add(city);
 
-                            const divCity = document.createElement("div");
-                            const pCityInfo = document.createElement("p");
-                            pCityInfo.textContent = city;
-                            divCity.classList.add("city-info-dropdown-item");
-
-                            divCity.dataset.lat = (result.geometry.coordinates[0]).toFixed(2);
-                            divCity.dataset.lon = (result.geometry.coordinates[1]).toFixed(2);
-                            divCity.appendChild(pCityInfo);
-                            list.appendChild(divCity);
+                            renderCityDropdown(list, city, (result.geometry.coordinates[0]).toFixed(2), (result.geometry.coordinates[1]).toFixed(2));
                         }
                     }
 
