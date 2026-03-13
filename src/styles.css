@@ -14,6 +14,38 @@ body {
     margin: 0;
 }
 
+.default {
+    background-image: linear-gradient(135deg, #3B5E8F, #5F84BC, #8FB6E8);
+}
+
+.clouds {
+    background-image: linear-gradient(135deg, #4F6F9C, #6F8FB6, #9FB6D4);
+}
+
+.mist {
+    background-image: linear-gradient(135deg, #6F7F97, #8C9CB1, #B2BECF);
+}
+
+.rain {
+    background-image: linear-gradient(135deg, #3E5878, #567497, #7F9BB8);
+}
+
+.drizzle {
+    background-image: linear-gradient(135deg, #4A678F, #6C8FB6, #9AB4D3);
+}
+
+.snow {
+    background-image: linear-gradient(135deg, #B7CBE0, #94B2D3, #6F8FB8);
+}
+
+.thunderstorm {
+    background-image: linear-gradient(135deg, #2E3F56, #415973, #5F7792);
+}
+
+.night {
+    background-image: linear-gradient(135deg, #1C2740, #2B3F66, #445A86);
+}
+
 nav {
     height: 64px;
     width: 100%;
@@ -27,7 +59,6 @@ nav {
 
 body {
     min-height: 100vh;
-    background-image: linear-gradient(135deg, #3B5E8F, #5F84BC, #8FB6E8);
     font-family: "Inter";
 }
 
@@ -42,13 +73,13 @@ main {
     justify-content: center;
 }
 
-.navbar-title{
+.navbar-title {
     font-size: 28px;
     letter-spacing: 0.5px;
     font-weight: 500;
 }
 
-input[type="search"]{
+input[type="search"] {
     height: 36px;
     width: 270px;
     padding: 0 12px;
@@ -60,13 +91,13 @@ input[type="search"]{
     font-weight: 400;
 }
 
-input[type="search"]:focus{
+input[type="search"]:focus {
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
-label{
+label {
     font-size: 18px;
     font-weight: 500;
     color: #F1F5F9;
@@ -74,13 +105,13 @@ label{
     letter-spacing: 0.3px;
 }
 
-.search-bar-wrapper{
+.search-bar-wrapper {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.list{
+.list {
     width: 270px;
     padding: 6px 0;
     background-color: rgba(255, 255, 255, 0.14);
@@ -89,7 +120,7 @@ label{
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.city-info-dropdown-item{
+.city-info-dropdown-item {
     padding: 0 14px;
     font-size: 16px;
     font-weight: 400;
@@ -102,19 +133,19 @@ label{
     align-items: center;
 }
 
-.city-info-dropdown-item:hover{
+.city-info-dropdown-item:hover {
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-.city-name-span{
+.city-name-span {
     font-weight: 500;
 }
 
-.country-name-{
+.country-name- {
     font-weight: 400;
 }
 
-.weather-result-wrapper{
+.weather-result-wrapper {
     margin-top: 12px;
     width: 340px;
 
@@ -132,14 +163,14 @@ label{
     gap: 16px;
 }
 
-.weather-result-location{
+.weather-result-location {
     font-size: 22px;
     color: #F8FAFC;
 
     letter-spacing: 0.2px;
 }
 
-.weather-result-temperature{
+.weather-result-temperature {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -149,7 +180,7 @@ label{
     line-height: 1;
 }
 
-.weather-result-description{
+.weather-result-description {
     font-size: 16px;
     text-transform: capitalize;
     color: rgba(248, 250, 252, 0.9);
@@ -157,7 +188,7 @@ label{
     font-weight: 400;
 }
 
-.weather-result-min-max-temp{
+.weather-result-min-max-temp {
     display: flex;
     gap: 16px;
 
@@ -166,26 +197,26 @@ label{
     font-weight: 400;
 }
 
-.weather-result-details{
+.weather-result-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 12px;
     margin-top: 8px;
 }
 
-.weather-result-details-label{
+.weather-result-details-label {
     font-size: 12px;
     font-weight: 500;
     color: rgba(248, 250, 252, 0.65);
 }
 
-.weather-result-details-value{
+.weather-result-details-value {
     font-size: 16px;
     font-weight: 500;
     color: #F8FAFC;
 }
 
-.btns-wrapper{
+.btns-wrapper {
     display: flex;
     gap: 2px;
     padding: 2px;
@@ -198,7 +229,7 @@ label{
     margin-top: 40px;
 }
 
-.toggle-btn{
+.toggle-btn {
     border: none;
     height: 26px;
     border-radius: 6px;
@@ -211,16 +242,16 @@ label{
     background-color: transparent;
 }
 
-.selected-btn{
+.selected-btn {
     background-color: rgba(255, 255, 255, 0.35);
     color: #F8FAFC;
 }
 
-img{
+img {
     width: 48px;
     height: 48px;
 }
 
-.inactive{
+.inactive {
     display: none;
 }

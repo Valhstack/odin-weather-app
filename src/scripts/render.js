@@ -26,51 +26,73 @@ const render = (function () {
 
         divCity.dataset.lat = lat;
         divCity.dataset.lon = lon;
+        divCity.dataset.location = `${cityName}, ${countryName}`;
         divCity.appendChild(pCityInfo);
         list.appendChild(divCity);
     };
 
+    const weatherBackgroundSelection = (weatherID) => {
+        if (weatherID < 300) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("thunderstorm");
+        }
+        else if (weatherID >= 300 && weatherID < 500) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("drizzle");
+        }
+        else if (weatherID >= 500 && weatherID < 600) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("rain");
+        }
+        else if (weatherID >= 600 && weatherID < 700) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("snow");
+        }
+        else if (weatherID >= 700 && weatherID < 800) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("mist");
+        }
+        else if (weatherID >= 801) {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("clouds");
+        }
+        else {
+            document.body.setAttribute("class", "");
+            document.body.classList.add("default");
+        }
+    };
+
     const weatherInfo = (result) => {
-        let location = document.getElementById("city-search").value;
         document.getElementById("city-search").value = "";
+
+        const defaultBtn = document.getElementById("celcius-btn");
+        const isMetric = defaultBtn.classList.contains("selected-btn");
+
+        if ((result.weather[0].icon).includes("n")) {
+            document.body.classList.remove("default");
+            document.body.classList.add("night");
+        }
+        else {
+            weatherBackgroundSelection(result.weather[0].id);
+        }
 
         reset("weather-result", ".weather-result-wrapper");
 
         document.getElementById("list").classList.add("inactive");
 
         const divResults = document.getElementById("weather-result");
+
         const divWeatherResultsWrapper = document.createElement("div");
         divWeatherResultsWrapper.classList.add("weather-result-wrapper");
 
         divResults.classList.remove("inactive");
         document.getElementById("temp-btns").classList.remove("inactive");
 
-        /*const divButtonsWrapper = document.createElement("div");
-        divButtonsWrapper.classList.add("btns-wrapper");
-        divButtonsWrapper.id = "bts-wrapper";
-
-        const btnCelcius = document.createElement("button");
-        btnCelcius.classList.add("toggle-btn");
-        btnCelcius.classList.add("selected-btn");
-        btnCelcius.id = "celcius-btn";
-        btnCelcius.textContent = "°C";
-
-        const btnFarengheight = document.createElement("button");
-        btnFarengheight.classList.add("toggle-btn");
-        btnFarengheight.id = "farengheight-btn";
-        btnFarengheight.textContent = "°F";
-
-        divButtonsWrapper.appendChild(btnCelcius);
-        divButtonsWrapper.appendChild(btnFarengheight);
-
-        const main = document.querySelector("main");
-        main.insertBefore(divButtonsWrapper, divResults);*/
-
         const divLocation = document.createElement("div");
         divLocation.classList.add("weather-result-location");
 
         const pLocation = document.createElement("div");
-        pLocation.textContent = location;
+        pLocation.textContent = divResults.dataset.location ? divResults.dataset.location : result.name;
 
         divLocation.appendChild(pLocation);
         divWeatherResultsWrapper.appendChild(divLocation);
@@ -129,7 +151,7 @@ const render = (function () {
 
         const pWindValue = document.createElement("p");
         pWindValue.classList.add("weather-result-details-value");
-        pWindValue.textContent = `${(result.wind.speed * 3.6).toFixed(0)} km/h`;
+        pWindValue.textContent = isMetric ? `${(result.wind.speed * 3.6).toFixed(0)} km/h` : `${result.wind.speed.toFixed(0)} mph`;
 
         const pPressureLabel = document.createElement("p");
         pPressureLabel.classList.add("weather-result-details-label");
