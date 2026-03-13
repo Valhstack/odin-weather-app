@@ -10,8 +10,6 @@ function fetchWeather(lon, lat) {
             console.log(response);
             renderWeatherInfo(response);
         });
-
-    console.log(document.getElementById("city-search").value);
 }
 
 export { fetchWeather };

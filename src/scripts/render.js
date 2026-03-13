@@ -5,10 +5,23 @@ const render = (function () {
         elems.forEach(elem => elem.remove());
     };
 
-    const cityDropdownItems = (list, city, lat, lon) => {
+    const cityDropdownItems = (list, cityName, countryName, lat, lon) => {
+        list.classList.remove("inactive");
+
         const divCity = document.createElement("div");
         const pCityInfo = document.createElement("p");
-        pCityInfo.textContent = city;
+
+        const spanCityName = document.createElement("span");
+        spanCityName.classList.add("city-name-span");
+        spanCityName.textContent = `${cityName}, `;
+
+        const spanCountryName = document.createElement("span");
+        spanCountryName.classList.add("country-name-span");
+        spanCountryName.textContent = countryName;
+
+        pCityInfo.appendChild(spanCityName);
+        pCityInfo.appendChild(spanCountryName);
+
         divCity.classList.add("city-info-dropdown-item");
 
         divCity.dataset.lat = lat;
@@ -18,44 +31,110 @@ const render = (function () {
     };
 
     const weatherInfo = (result) => {
+        document.getElementById("list").classList.add("inactive");
+
         const divResults = document.getElementById("weather-result");
 
-        const divDescription = document.createElement("div");
-        const pDescription = document.createElement("p");
+        divResults.classList.remove("inactive");
 
-        pDescription.textContent = result.weather[0].description;
+        const divLocation = document.createElement("div");
+        divLocation.classList.add("weather-result-location");
+
+        const pLocation = document.createElement("div");
+        pLocation.textContent = document.getElementById("city-search").value;
+
+        divLocation.appendChild(pLocation);
+        divResults.appendChild(divLocation);
+
+        const divTemperature = document.createElement("div");
+        const pCurrentTemp = document.createElement("p");
+
+        divTemperature.classList.add("weather-result-temperature");
+
+        pCurrentTemp.textContent = `${(result.main.temp).toFixed(0)}°`;
 
         const imgWeatherIcon = document.createElement("img");
         imgWeatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
 
-        divDescription.appendChild(pDescription);
-        divDescription.appendChild(imgWeatherIcon);
+        divTemperature.appendChild(pCurrentTemp);
+        divTemperature.appendChild(imgWeatherIcon);
+        divResults.appendChild(divTemperature);
 
-        const divTemperature = document.createElement("div");
-        const pCurrentTemp = document.createElement("p");
+        const divDescription = document.createElement("div");
+        divDescription.classList.add("weather-result-description");
+
+        const pDescription = document.createElement("p");
+
+        pDescription.textContent = result.weather[0].description;
+
+        divDescription.appendChild(pDescription);
+        divResults.appendChild(divDescription);
+
+        const divMinMaxTempt = document.createElement("div");
+        divMinMaxTempt.classList.add("weather-result-min-max-temp");
+
         const pMinTemp = document.createElement("p");
         const pMaxTemp = document.createElement("p");
-        const pHumidity = document.createElement("p");
 
-        pCurrentTemp.textContent = `Current temperature: ${result.main.temp}`;
-        pMinTemp.textContent = `Minimal temperature today: ${result.main.temp_min}`;
-        pMaxTemp.textContent = `Maximal temperature today: ${result.main.temp_max}`;
-        pHumidity.textContent = `Humidity: ${result.main.humidity}%`;
+        pMinTemp.textContent = `Min: ${(result.main.temp_min).toFixed(0)}°`;
+        pMaxTemp.textContent = `Max: ${(result.main.temp_max).toFixed(0)}°`;
 
-        divTemperature.appendChild(pCurrentTemp);
-        divTemperature.appendChild(pMinTemp);
-        divTemperature.appendChild(pMaxTemp);
-        divTemperature.appendChild(pHumidity);
+        divMinMaxTempt.appendChild(pMinTemp);
+        divMinMaxTempt.appendChild(pMaxTemp);
+        divResults.appendChild(divMinMaxTempt);
 
-        divResults.appendChild(divDescription);
-        divResults.appendChild(divTemperature);
+        const divWeatherDetails = document.createElement("div");
+        divWeatherDetails.classList.add("weather-result-details");
+
+        const pHumidityLabel = document.createElement("p");
+        pHumidityLabel.classList.add("weather-result-details-label");
+        pHumidityLabel.textContent = "Humidity";
+
+        const pHumidityValue = document.createElement("p");
+        pHumidityValue.classList.add("weather-result-details-value");
+        pHumidityValue.textContent = `${result.main.humidity}%`;
+
+        const pWindLabel = document.createElement("p");
+        pWindLabel.classList.add("weather-result-details-label");
+        pWindLabel.textContent = "Wind";
+
+        const pWindValue = document.createElement("p");
+        pWindValue.classList.add("weather-result-details-value");
+        pWindValue.textContent = `${(result.wind.speed * 3.6).toFixed(0)} km/h`;
+
+        const pPressureLabel = document.createElement("p");
+        pPressureLabel.classList.add("weather-result-details-label");
+        pPressureLabel.textContent = "Presure";
+
+        const pPressureValue = document.createElement("p");
+        pPressureValue.classList.add("weather-result-details-value");
+        pPressureValue.textContent = `${result.main.pressure} hPa`;
+
+        const pTempFeelsLabel = document.createElement("p");
+        pTempFeelsLabel.classList.add("weather-result-details-label");
+        pTempFeelsLabel.textContent = "Feels like";
+
+        const pTempFeelsValue = document.createElement("p");
+        pTempFeelsValue.classList.add("weather-result-details-value");
+        pTempFeelsValue.textContent = `${(result.main.feels_like.toFixed(0))}°`;
+
+        divWeatherDetails.appendChild(pHumidityLabel);
+        divWeatherDetails.appendChild(pHumidityValue);
+        divWeatherDetails.appendChild(pWindLabel);
+        divWeatherDetails.appendChild(pWindValue);
+        divWeatherDetails.appendChild(pPressureLabel);
+        divWeatherDetails.appendChild(pPressureValue);
+        divWeatherDetails.appendChild(pTempFeelsLabel);
+        divWeatherDetails.appendChild(pTempFeelsValue);
+
+        divResults.appendChild(divWeatherDetails);
     }
 
     return { reset, cityDropdownItems, weatherInfo };
 })();
 
 const reset = (elemID, className) => render.reset(elemID, className);
-const renderCityDropdown = (list, city, lat, lon) => render.cityDropdownItems(list, city, lat, lon);
+const renderCityDropdown = (list, cityName, countryName, lat, lon) => render.cityDropdownItems(list, cityName, countryName, lat, lon);
 const renderWeatherInfo = (result) => render.weatherInfo(result);
 
 export { reset, renderCityDropdown, renderWeatherInfo };

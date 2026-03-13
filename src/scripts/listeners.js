@@ -4,11 +4,11 @@ const attachListeners = (items, handler) => {
     }
 };
 
-const listeners = () => {
+/*const listeners = () => {
     document.getElementById("search-btn").addEventListener("click", (e) => {
         console.log(e);
         console.log(document.getElementById("city-search").value);
     });
-}
+}*/
 
-export { listeners, attachListeners };
+export { attachListeners };

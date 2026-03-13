@@ -32,7 +32,7 @@ const cityName = () => {
                         if (!seen.has(city)) {
                             seen.add(city);
 
-                            renderCityDropdown(list, city, (result.geometry.coordinates[0]).toFixed(2), (result.geometry.coordinates[1]).toFixed(2));
+                            renderCityDropdown(list, result.properties.name, result.properties.country, (result.geometry.coordinates[0]).toFixed(2), (result.geometry.coordinates[1]).toFixed(2));
                         }
                     }
 
