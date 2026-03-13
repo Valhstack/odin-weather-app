@@ -31,20 +31,49 @@ const render = (function () {
     };
 
     const weatherInfo = (result) => {
+        let location = document.getElementById("city-search").value;
+        document.getElementById("city-search").value = "";
+
+        reset("weather-result", ".weather-result-wrapper");
+
         document.getElementById("list").classList.add("inactive");
 
         const divResults = document.getElementById("weather-result");
+        const divWeatherResultsWrapper = document.createElement("div");
+        divWeatherResultsWrapper.classList.add("weather-result-wrapper");
 
         divResults.classList.remove("inactive");
+        document.getElementById("temp-btns").classList.remove("inactive");
+
+        /*const divButtonsWrapper = document.createElement("div");
+        divButtonsWrapper.classList.add("btns-wrapper");
+        divButtonsWrapper.id = "bts-wrapper";
+
+        const btnCelcius = document.createElement("button");
+        btnCelcius.classList.add("toggle-btn");
+        btnCelcius.classList.add("selected-btn");
+        btnCelcius.id = "celcius-btn";
+        btnCelcius.textContent = "°C";
+
+        const btnFarengheight = document.createElement("button");
+        btnFarengheight.classList.add("toggle-btn");
+        btnFarengheight.id = "farengheight-btn";
+        btnFarengheight.textContent = "°F";
+
+        divButtonsWrapper.appendChild(btnCelcius);
+        divButtonsWrapper.appendChild(btnFarengheight);
+
+        const main = document.querySelector("main");
+        main.insertBefore(divButtonsWrapper, divResults);*/
 
         const divLocation = document.createElement("div");
         divLocation.classList.add("weather-result-location");
 
         const pLocation = document.createElement("div");
-        pLocation.textContent = document.getElementById("city-search").value;
+        pLocation.textContent = location;
 
         divLocation.appendChild(pLocation);
-        divResults.appendChild(divLocation);
+        divWeatherResultsWrapper.appendChild(divLocation);
 
         const divTemperature = document.createElement("div");
         const pCurrentTemp = document.createElement("p");
@@ -54,11 +83,11 @@ const render = (function () {
         pCurrentTemp.textContent = `${(result.main.temp).toFixed(0)}°`;
 
         const imgWeatherIcon = document.createElement("img");
-        imgWeatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`;
+        imgWeatherIcon.src = `https://openweathermap.org/img/wn/${result.weather[0].icon}@4x.png`;
 
         divTemperature.appendChild(pCurrentTemp);
         divTemperature.appendChild(imgWeatherIcon);
-        divResults.appendChild(divTemperature);
+        divWeatherResultsWrapper.appendChild(divTemperature);
 
         const divDescription = document.createElement("div");
         divDescription.classList.add("weather-result-description");
@@ -68,7 +97,7 @@ const render = (function () {
         pDescription.textContent = result.weather[0].description;
 
         divDescription.appendChild(pDescription);
-        divResults.appendChild(divDescription);
+        divWeatherResultsWrapper.appendChild(divDescription);
 
         const divMinMaxTempt = document.createElement("div");
         divMinMaxTempt.classList.add("weather-result-min-max-temp");
@@ -81,7 +110,7 @@ const render = (function () {
 
         divMinMaxTempt.appendChild(pMinTemp);
         divMinMaxTempt.appendChild(pMaxTemp);
-        divResults.appendChild(divMinMaxTempt);
+        divWeatherResultsWrapper.appendChild(divMinMaxTempt);
 
         const divWeatherDetails = document.createElement("div");
         divWeatherDetails.classList.add("weather-result-details");
@@ -127,7 +156,9 @@ const render = (function () {
         divWeatherDetails.appendChild(pTempFeelsLabel);
         divWeatherDetails.appendChild(pTempFeelsValue);
 
-        divResults.appendChild(divWeatherDetails);
+        divWeatherResultsWrapper.appendChild(divWeatherDetails);
+
+        divResults.appendChild(divWeatherResultsWrapper);
     }
 
     return { reset, cityDropdownItems, weatherInfo };
