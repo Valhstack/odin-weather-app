@@ -14,6 +14,17 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
 .default {
     background-image: linear-gradient(135deg, #3B5E8F, #5F84BC, #8FB6E8);
 }
@@ -60,6 +71,9 @@ nav {
 body {
     min-height: 100vh;
     font-family: "Inter";
+
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -71,6 +85,24 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+footer {
+    margin-top: auto;
+
+    padding: 24px 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.full-attribution {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
 }
 
 .navbar-title {
