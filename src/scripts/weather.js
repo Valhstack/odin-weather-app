@@ -7,7 +7,6 @@ function fetchWeather(lat, lon, units) {
             return response.json();
         })
         .then(function (response) {
-            console.log(response);
             renderWeatherInfo(response);
         });
 }
