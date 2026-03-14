@@ -13,6 +13,7 @@ const listeners = () => {
             document.getElementById("celcius-btn").classList.add("selected-btn");
             document.getElementById("farengheight-btn").classList.remove("selected-btn");
             fetchWeather(location.dataset.lat, location.dataset.lon, "metric");
+            fetchWeatherForecast(location.dataset.lat, location.dataset.lon, "metric");
         }
     });
 
@@ -22,6 +23,7 @@ const listeners = () => {
             document.getElementById("farengheight-btn").classList.add("selected-btn");
             document.getElementById("celcius-btn").classList.remove("selected-btn");
             fetchWeather(location.dataset.lat, location.dataset.lon, "imperial");
+            fetchWeatherForecast(location.dataset.lat, location.dataset.lon, "imperial");
         }
     });
 
@@ -30,6 +32,9 @@ const listeners = () => {
     }
 
     function success(position) {
+        document.getElementById("weather-result").dataset.lat = position.coords.latitude.toFixed(2);
+        document.getElementById("weather-result").dataset.lon = position.coords.longitude.toFixed(2);
+
         fetchWeather(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2), "metric");
         fetchWeatherForecast(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2), "metric");
     }

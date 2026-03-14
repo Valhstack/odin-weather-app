@@ -225,16 +225,19 @@ const render = (function () {
         divDayWrapper.classList.add("forecast-day-wrapper");
 
         const pDayOfWeek = document.createElement("p");
+        pDayOfWeek.classList.add("day-of-week-label");
         pDayOfWeek.textContent = dayOfWeek;
 
         const imgWeatherIcon = document.createElement("img");
         imgWeatherIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`;
 
         const pTempForecast = document.createElement("p");
-        pTempForecast.textContent = day.main.temp;
+        pTempForecast.classList.add("temp-forecast");
+        pTempForecast.textContent = `${(day.main.temp).toFixed(0)}°`;
 
         const pPopForecast = document.createElement("p");
-        pPopForecast.textContent = `${day.pop * 10}%`;
+        pPopForecast.classList.add("pop-forecast");
+        pPopForecast.textContent = `${(day.pop * 10).toFixed(1)}%`;
 
         divDayWrapper.appendChild(pDayOfWeek);
         divDayWrapper.appendChild(imgWeatherIcon);
