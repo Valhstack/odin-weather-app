@@ -291,9 +291,6 @@ label {
 .weather-forecast-wrapper {
     display: flex;
     gap: 14px;
-
-    overflow-x: auto;
-    scroll-behavior: smooth;
 }
 
 .weather-forecast-wrapper img {
@@ -350,7 +347,25 @@ label {
         max-width: 350px;
     }
 
-    footer{
+    .weather-forecast-wrapper {
+        overflow-x: auto;
+        scroll-behavior: smooth;
+
+        padding: 12px;
+
+        border-radius: 14px;
+        mask-image: linear-gradient(to right,
+                transparent,
+                black 16px,
+                black calc(100% - 16px),
+                transparent);
+    }
+
+    .forecast-day-wrapper{
+        box-shadow: none;
+    }
+
+    footer {
         max-width: 350px;
     }
 }
