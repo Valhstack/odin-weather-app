@@ -367,5 +367,11 @@ label {
 
     footer {
         max-width: 350px;
+        align-self: center;
+    }
+
+    .full-attribution{
+        align-items: center;
+        justify-content: center;
     }
 }
