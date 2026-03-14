@@ -1,4 +1,4 @@
-import { fetchWeather } from "./weather.js";
+import { fetchWeather, fetchWeatherForecast } from "./weather.js";
 
 const attachListeners = (items, handler) => {
     for (let item of items) {
@@ -31,6 +31,7 @@ const listeners = () => {
 
     function success(position) {
         fetchWeather(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2), "metric");
+        fetchWeatherForecast(position.coords.latitude.toFixed(2), position.coords.longitude.toFixed(2), "metric");
     }
 }
 

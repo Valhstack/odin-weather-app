@@ -1,6 +1,6 @@
 import { reset, renderCityDropdown } from "./render.js";
 import { attachListeners } from "./listeners.js";
-import { fetchWeather } from "./weather.js";
+import { fetchWeather, fetchWeatherForecast } from "./weather.js";
 
 function optionSelectedHandler(e) {
     const lon = e.currentTarget.dataset.lon;
@@ -12,6 +12,7 @@ function optionSelectedHandler(e) {
 
     document.getElementById("city-search").value = e.currentTarget.querySelector("p").textContent;
     fetchWeather(lat, lon, "metric");
+    fetchWeatherForecast(lat, lon, "metric");
 }
 
 const cityName = () => {

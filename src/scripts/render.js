@@ -1,3 +1,5 @@
+import { DAYS_OF_WEEK } from "./weekDay.js"
+
 const render = (function () {
     const reset = (elemID, className) => {
         const elems = document.getElementById(elemID).querySelectorAll(className);
@@ -181,13 +183,73 @@ const render = (function () {
         divWeatherResultsWrapper.appendChild(divWeatherDetails);
 
         divResults.appendChild(divWeatherResultsWrapper);
+    };
+
+    const weatherForecast = (result) => {
+        const currentDate = new Date();
+        const month = (currentDate.getMonth() + 1) < 10 ? ("0" + (currentDate.getMonth() + 1)) : (currentDate.getMonth() + 1);
+        const date = currentDate.getDate() < 10 ? ("0" + (currentDate.getDate() + 1)) : (currentDate.getDate());
+        const currentDay = currentDate.getFullYear() + "-" + month + "-" + date;
+
+        const forecastToRender = [];
+
+        for (let r of result.list) {
+            if (!r.dt_txt.includes(currentDay) && r.dt_txt.includes("12:00:00")) {
+                forecastToRender.push(r);
+            }
+        }
+
+        console.log(forecastToRender);
+
+        const divForecast = document.getElementById("weather-forecast");
+        divForecast.classList.remove("inactive");
+
+        reset("weather-forecast", ".weather-forecast-wrapper");
+
+        const divWrapper = document.createElement("div");
+        divWrapper.id = "weather-forecast-wrapper";
+        divWrapper.classList.add("weather-forecast-wrapper");
+
+        for (let day of forecastToRender) {
+            const dayOfWeek = new Date(day.dt_txt);
+            console.log(dayOfWeek.getDay());
+
+            divWrapper.appendChild(forecastDay(day, DAYS_OF_WEEK[dayOfWeek.getDay()]));
+        }
+
+        divForecast.appendChild(divWrapper);
+    };
+
+    const forecastDay = (day, dayOfWeek) => {
+        const divDayWrapper = document.createElement("div");
+        divDayWrapper.classList.add("forecast-day-wrapper");
+
+        const pDayOfWeek = document.createElement("p");
+        pDayOfWeek.textContent = dayOfWeek;
+
+        const imgWeatherIcon = document.createElement("img");
+        imgWeatherIcon.src = `https://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`;
+
+        const pTempForecast = document.createElement("p");
+        pTempForecast.textContent = day.main.temp;
+
+        const pPopForecast = document.createElement("p");
+        pPopForecast.textContent = `${day.pop * 10}%`;
+
+        divDayWrapper.appendChild(pDayOfWeek);
+        divDayWrapper.appendChild(imgWeatherIcon);
+        divDayWrapper.appendChild(pTempForecast);
+        divDayWrapper.appendChild(pPopForecast);
+
+        return divDayWrapper;
     }
 
-    return { reset, cityDropdownItems, weatherInfo };
+    return { reset, cityDropdownItems, weatherInfo, weatherForecast };
 })();
 
 const reset = (elemID, className) => render.reset(elemID, className);
 const renderCityDropdown = (list, cityName, countryName, lat, lon) => render.cityDropdownItems(list, cityName, countryName, lat, lon);
 const renderWeatherInfo = (result) => render.weatherInfo(result);
+const renderWeatherForecast = (result) => render.weatherForecast(result);
 
-export { reset, renderCityDropdown, renderWeatherInfo };
+export { reset, renderCityDropdown, renderWeatherInfo, renderWeatherForecast };
